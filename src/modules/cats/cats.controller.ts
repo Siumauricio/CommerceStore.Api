@@ -39,7 +39,7 @@ export class CatsController {
     return name;
   }
   @Get()
-  @Roles('admin')
+  // @Roles('admin')
   async findAll(): Promise<Cat[]> {
     return this.catsService.findAll();
   }
