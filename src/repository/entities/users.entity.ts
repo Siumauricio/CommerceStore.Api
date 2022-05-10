@@ -1,4 +1,5 @@
-import { Column, Entity, Index, OneToMany } from 'typeorm';
+import { randomUUID } from 'crypto';
+import { BaseEntity, Column, Entity, Index, OneToMany } from 'typeorm';
 import { Cart } from './cart.entity';
 @Index('users_pkey', ['idUser'], { unique: true })
 @Entity('users', { schema: 'public' })
@@ -26,6 +27,9 @@ export class Users {
 
   @Column('text', { name: 'userType' })
   userType: string;
+
+  @Column('text', { name: 'password' })
+  password: string;
 
   @OneToMany(() => Cart, (cart) => cart.idUser)
   carts: Cart[];

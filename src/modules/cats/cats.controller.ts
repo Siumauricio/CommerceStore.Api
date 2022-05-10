@@ -8,8 +8,8 @@ import {
   UseFilters,
   ValidationPipe,
 } from '@nestjs/common';
-import { Cats } from '../../../decorators/cat.decorator';
-import { Roles } from '../../../decorators/roles.decorator';
+import { Cats } from '../../decorators/cat.decorator';
+import { Roles } from '../../decorators/roles.decorator';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';

@@ -19,4 +19,12 @@ export class UserDto {
   @ApiProperty()
   @IsString()
   email: string;
+
+  @ApiProperty()
+  @IsString()
+  userType: string;
+
+  @ApiProperty()
+  @IsString()
+  password: string;
 }
