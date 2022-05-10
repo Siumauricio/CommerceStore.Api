@@ -32,6 +32,11 @@
 $ npm install
 ```
 
+```bash
+-- open swagger interface
+go to http://localhost:3000/api
+```
+
 ## Running the app
 
 ```bash
@@ -57,6 +62,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
 ```java
 -- Command to up a postgres database
 docker run --name postgres-db -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
