@@ -1,9 +1,13 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { Auth } from 'src/decorators/auth.decorator';
+import { Roles } from 'src/decorators/roles.decorator';
+import { RolesGuard } from 'src/guards/roles.guard';
 import { Users } from 'src/repository/entities/users.entity';
 import { AuthDto, AuthRegisterDto } from './auth.dto';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth-guard';
 import { LocalAuthGuard } from './local-auth.guard';
+import { Role } from './roles.enum';
 
 @Controller('auth')
 export class AuthController {
@@ -18,8 +22,12 @@ export class AuthController {
   async register(@Body() authDto: AuthRegisterDto) {
     return this.authService.register(authDto);
   }
+
+  // @UseGuards(JwtAuthGuard)
+  // @Roles(Role.Admin)
+  // @UseGuards(RolesGuard)
+  @Auth(Role.Member)
   @Post('register2')
-  @UseGuards(JwtAuthGuard)
   getProfile(@Request() req) {
     return req.user;
   }
