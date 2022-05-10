@@ -1,5 +1,5 @@
-import { CatsController } from './common/modules/cats/cats.controller';
-import { CatsModule } from './common/modules/cats/cats.module';
+import { CatsController } from './modules/cats/cats.controller';
+import { CatsModule } from './modules/cats/cats.module';
 import {
   MiddlewareConsumer,
   Module,
@@ -9,10 +9,11 @@ import {
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
-import { UsersModule } from './common/modules/users/users.module';
-import { ProductsModule } from './common/modules/products/products.module';
-import { ProductListModule } from './common/modules/product-list/product-list.module';
-import { CartModule } from './common/modules/cart/cart.module';
+import { UsersModule } from './modules/users/users.module';
+import { ProductsModule } from './modules/products/products.module';
+import { ProductListModule } from './modules/product-list/product-list.module';
+import { CartModule } from './modules/cart/cart.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CartModule } from './common/modules/cart/cart.module';
     ProductsModule,
     ProductListModule,
     CartModule,
+    AuthModule,
   ],
 })
 export class AppModule implements NestModule {
