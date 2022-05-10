@@ -57,6 +57,14 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+```java
+-- Command to up a postgres database
+docker run --name postgres-db -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+-Host: localhost
+-Port: 5432
+-User: postgres
+-Password: docker
+```
 
 ```sql
 --Schema database
