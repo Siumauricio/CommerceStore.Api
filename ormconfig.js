@@ -10,3 +10,4 @@ module.exports = {
   migrationsDir: 'src/repository/migrations',
   synchronize: false,
 };
+// , 'src/repository/entities/*.entity.ts'
