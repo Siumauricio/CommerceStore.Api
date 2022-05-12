@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
+import { Connection, getConnectionOptions } from 'typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { ProductsModule } from './modules/products/products.module';
 import { ProductListModule } from './modules/product-list/product-list.module';
@@ -18,6 +18,12 @@ import { AuthModule } from './modules/auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
+    // TypeOrmModule.forRootAsync({
+    //   useFactory: async () =>
+    //     Object.assign(await getConnectionOptions(), {
+    //       autoLoadEntities: true,
+    //     }),
+    // }),
     CatsModule,
     UsersModule,
     ProductsModule,

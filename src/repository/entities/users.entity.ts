@@ -1,4 +1,3 @@
-import { randomUUID } from 'crypto';
 import { BaseEntity, Column, Entity, Index, OneToMany } from 'typeorm';
 import { Cart } from './cart.entity';
 @Index('users_pkey', ['idUser'], { unique: true })

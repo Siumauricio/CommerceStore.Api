@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ApiResponse } from 'src/common/config/apiresponse';
-import { Users } from 'src/repository/entities/users.entity';
+import { ApiResponse } from '../../common/config/apiresponse';
+import { Users } from '../../repository/entities/users.entity';
 import { Repository } from 'typeorm';
 import { AuthDto, AuthRegisterDto } from './auth.dto';
 import { randomUUID } from 'crypto';
@@ -48,6 +48,7 @@ export class AuthService {
     const result = await this.usersRepository.findOne({
       where: { email: user.email.toLowerCase() },
     });
+    console.log(user);
     if (!result) {
       const userEntity = AuthService.dtoToEntity(user);
       userEntity.password = await this.crypt.hashPassword(user.password);

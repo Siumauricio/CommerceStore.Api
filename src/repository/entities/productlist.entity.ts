@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
 import { Cart } from './cart.entity';
 import { Products } from './products.entity';
 @Entity('productList', { schema: 'public' })

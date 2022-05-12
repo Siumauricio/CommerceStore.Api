@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Delete } from '@nestjs/common';
-import { Auth } from 'src/decorators/auth.decorator';
+import { Auth } from '../../decorators/auth.decorator';
 import { Role } from '../auth/roles.enum';
 import { UsersService } from './users.service';
 

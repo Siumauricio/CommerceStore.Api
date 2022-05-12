@@ -1,11 +1,7 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { Auth } from 'src/decorators/auth.decorator';
-import { Roles } from 'src/decorators/roles.decorator';
-import { RolesGuard } from 'src/guards/roles.guard';
-import { Users } from 'src/repository/entities/users.entity';
+import { Auth } from '../../decorators/auth.decorator';
 import { AuthDto, AuthRegisterDto } from './auth.dto';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './jwt-auth-guard';
 import { LocalAuthGuard } from './local-auth.guard';
 import { Role } from './roles.enum';
 
@@ -13,9 +9,10 @@ import { Role } from './roles.enum';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  // , @Body() authDto: AuthDto
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async auth(@Request() req, @Body() authDto: AuthDto) {
+  async auth(@Request() req) {
     return this.authService.login(req.user);
   }
   @Post('register')

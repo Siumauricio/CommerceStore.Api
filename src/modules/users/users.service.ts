@@ -2,8 +2,8 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { randomUUID } from 'crypto';
-import { ApiResponse } from 'src/common/config/apiresponse';
-import { Users } from 'src/repository/entities/users.entity';
+import { ApiResponse } from '../../common/config/apiresponse';
+import { Users } from '../../repository/entities/users.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from './user.dto';
 
