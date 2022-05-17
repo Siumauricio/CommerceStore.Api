@@ -8,7 +8,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  @Auth()
+  // @Auth()
   getUsers() {
     return this.usersService.getUsers();
   }

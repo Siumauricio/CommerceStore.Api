@@ -1,7 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { instanceToPlain, plainToClass } from 'class-transformer';
-import { randomUUID } from 'crypto';
 import { ApiResponse } from '../../common/config/apiresponse';
 import { Users } from '../../repository/entities/users.entity';
 import { Repository } from 'typeorm';
@@ -15,6 +14,7 @@ export class UsersService {
 
   getUsers = async (): Promise<ApiResponse<Users[]>> => {
     const result = await this.usersRepository.find();
+    // console.log(result);
     return ApiResponse(HttpStatus.OK, 'Users retrieved successfully', result);
   };
 
