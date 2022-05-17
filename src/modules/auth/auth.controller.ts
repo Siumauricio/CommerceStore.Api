@@ -1,18 +1,25 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { Auth } from '../../decorators/auth.decorator';
-import { AuthDto, AuthRegisterDto } from './auth.dto';
+import { AuthRegisterDto } from './auth.dto';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { Role } from './roles.enum';
-
+import { Request, Response } from 'express';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  // , @Body() authDto: AuthDto
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async auth(@Request() req) {
+  async auth(@Req() req) {
     return this.authService.login(req.user);
   }
   @Post('register')
@@ -20,12 +27,20 @@ export class AuthController {
     return this.authService.register(authDto);
   }
 
-  // @UseGuards(JwtAuthGuard)
   // @Roles(Role.Admin)
-  // @UseGuards(RolesGuard)
   @Auth(Role.Member)
   @Post('register2')
-  getProfile(@Request() req) {
+  getProfile(@Req() req) {
     return req.user;
+  }
+
+  @Get()
+  getPagination(@Req() request: Request, @Res() response: Response) {
+    const { count, page } = request.query;
+    if (!count || !page) {
+      response.status(400).send('Bad request');
+    } else {
+      response.send(200);
+    }
   }
 }

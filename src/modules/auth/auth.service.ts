@@ -8,12 +8,12 @@ import { randomUUID } from 'crypto';
 import { HashService } from './hash.service';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(Users) private usersRepository: Repository<Users>,
-    private crypt: HashService,
     private jwtService: JwtService,
   ) {}
 
@@ -22,10 +22,7 @@ export class AuthService {
       where: { email: authDto.email.toLowerCase() },
     });
     if (result) {
-      const isValid = await this.crypt.comparePassword(
-        authDto.password,
-        result.password,
-      );
+      const isValid = await bcrypt.compare(authDto.password, result.password);
       return isValid
         ? ApiResponse(HttpStatus.OK, 'User authenticated successfully', result)
         : ApiResponse(HttpStatus.UNAUTHORIZED, 'Invalid password');
@@ -34,24 +31,30 @@ export class AuthService {
   };
 
   login = async (user: Users) => {
+    console.log(user);
+    if (!user || !user.idUser || !user.email || !user.userType) {
+      return ApiResponse(
+        HttpStatus.BAD_REQUEST,
+        'Properties types or properties names are incorrect',
+      );
+    }
     const payload = {
       id: user.idUser,
       email: user.email,
       userType: user.userType,
     };
-    return {
-      token: this.jwtService.sign(payload),
-    };
+    const token = this.jwtService.sign(payload);
+    // console.log(token);
+    return { token: token };
   };
 
   register = async (user: AuthRegisterDto): Promise<ApiResponse<Users>> => {
     const result = await this.usersRepository.findOne({
       where: { email: user.email.toLowerCase() },
     });
-    console.log(user);
     if (!result) {
       const userEntity = AuthService.dtoToEntity(user);
-      userEntity.password = await this.crypt.hashPassword(user.password);
+      userEntity.password = await bcrypt.hash(user.password, 10);
       userEntity.idUser = randomUUID();
       await this.usersRepository.save(userEntity);
       return ApiResponse(HttpStatus.CREATED, 'User created successfully');

@@ -20,6 +20,8 @@ import { Users } from '../../repository/entities/users.entity';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, HashService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, HashService],
+  exports: [JwtModule],
+  // , LocalStrategy, JwtStrategy , HashService
 })
 export class AuthModule {}
