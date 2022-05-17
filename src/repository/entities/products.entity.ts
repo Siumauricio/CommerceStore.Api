@@ -21,3 +21,14 @@ export class Products {
   @OneToMany(() => ProductList, (productList) => productList.idProduct)
   productLists: ProductList[];
 }
+export class MockProducts extends Products {
+  constructor() {
+    super();
+    this.idProduct = '';
+    this.productName = '';
+    this.description = '';
+    this.price = 0;
+    this.stock = 0;
+    this.productLists = [];
+  }
+}
