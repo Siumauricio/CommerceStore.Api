@@ -14,16 +14,11 @@ import { ProductsModule } from './modules/products/products.module';
 import { ProductListModule } from './modules/product-list/product-list.module';
 import { CartModule } from './modules/cart/cart.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { AuthService } from './modules/auth/auth.service';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
-    // TypeOrmModule.forRootAsync({
-    //   useFactory: async () =>
-    //     Object.assign(await getConnectionOptions(), {
-    //       autoLoadEntities: true,
-    //     }),
-    // }),
     CatsModule,
     UsersModule,
     ProductsModule,
