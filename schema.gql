@@ -1,0 +1,86 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Products {
+  idProduct: String!
+  productName: String!
+  description: String!
+  price: Float!
+  stock: Float!
+  productLists: [ProductList!]!
+}
+
+type ProductList {
+  idProductList: String!
+  idCart: Cart!
+  idProduct: Products!
+}
+
+type Cart {
+  idCart: String!
+  date: String!
+  quantity: Float!
+  idProductList: String!
+  idUser: Users!
+  productLists: [ProductList!]!
+}
+
+type Users {
+  idUser: String!
+  name: String!
+  lastname: String!
+  username: String!
+  age: Float!
+  email: String!
+  phoneNumber: String
+  userType: String!
+  password: String!
+  carts: [Cart!]!
+}
+
+type UsersResponse {
+  statusCode: Float!
+  message: String!
+  data: Users
+}
+
+type UsersResponseArray {
+  statusCode: Float!
+  message: String!
+  data: [Users!]
+}
+
+type ProductResponse {
+  statusCode: Float!
+  message: String!
+  data: Products
+}
+
+type ProductsResponseArray {
+  statusCode: Float!
+  message: String!
+  data: [Products!]
+}
+
+type Query {
+  userById(idUser: String!): UsersResponse!
+  allUsers: UsersResponseArray!
+  productById(idProduct: String!): ProductResponse!
+  allProducts: ProductsResponseArray!
+}
+
+type Mutation {
+  insertProduct(product: CreateProductDto!): ProductResponse!
+}
+
+input CreateProductDto {
+  productName: String!
+  description: String!
+  price: Float!
+  stock: Float!
+}
+
+type Subscription {
+  productAdded: ProductResponse!
+}
