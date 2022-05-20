@@ -1,18 +1,25 @@
 import { IsDecimal, IsInt, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Field, InputType } from '@nestjs/graphql';
+
+@InputType()
 export class CreateProductDto {
+  @Field()
   @ApiProperty()
   @IsString()
   productName: string;
 
+  @Field()
   @ApiProperty()
   @IsString()
-  description: number;
+  description: string;
 
+  @Field()
   @ApiProperty()
   @IsNumber()
   price: number;
 
+  @Field()
   @ApiProperty()
   @IsInt()
   stock: number;
